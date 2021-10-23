@@ -26,8 +26,10 @@ class ViewController: UIViewController {
         } else {
             resultLabel.text = "No, it was not \(countries[correctAnswer].uppercased())"
             resultLabel.textColor = .systemRed
-            score += 0
             turns += 1
+            score += 1
+            score -= 1
+            
         }
         
         ask()
@@ -65,6 +67,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        winOrLoseLabel.text = ""
+        resultLabel.text = ""
+        
+        turns = 0
+        score = 0
+        
+        button1.isHidden = false
+        button1.isEnabled = true
+        button2.isHidden = false
+        button2.isEnabled = true
+        button3.isHidden = false
+        button3.isEnabled = true
+        
         winOrLoseLabel.isEnabled = false
         winOrLoseLabel.isHidden = true
         
@@ -79,6 +94,22 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
         ask()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(viewDidLoad))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareGame))
+    }
+    
+    @objc func shareGame() {
+        let vc = UIActivityViewController(activityItems: ["http://mygametesttesttest.com", "Try this game!"], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+        
+        // Anything you want to exclude
+        vc.excludedActivityTypes = [
+            UIActivity.ActivityType.print
+        ]
+        
+        present(vc, animated: true)
     }
     
     func ask() {
