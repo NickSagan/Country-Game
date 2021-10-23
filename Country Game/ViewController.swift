@@ -101,7 +101,7 @@ class ViewController: UIViewController {
     }
     
     @objc func shareGame() {
-        let vc = UIActivityViewController(activityItems: ["http://mygametesttesttest.com", "Try this game!"], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: ["http://mytestflagsgametryitgame.com", "My result is\(score) of \(turns)", "Try to beat me", UIImage(named: "us")!], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
         
         // Anything you want to exclude
